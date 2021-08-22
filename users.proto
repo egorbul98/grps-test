@@ -1,0 +1,38 @@
+
+syntax = "proto3";
+
+package usersPackage;
+
+service CRUD {
+
+  rpc getUserById (Id) returns (User);
+  //rpc getUsers (Empty) returns (ArrayUsers);
+  rpc getUsers (Empty) returns (stream User);
+  rpc addUsers (stream User) returns (AddUsersResponse);
+  rpc getUsersByNames (stream UserName) returns (stream User);
+}
+
+message UserName {
+  string name = 1;
+}
+
+message Id {
+  string id = 1;
+}
+
+message AddUsersResponse {
+  string message = 1;
+}
+
+message User {
+  string id = 1;
+  string name = 2;
+  int32 age = 3;
+}
+
+message ArrayUsers {
+  repeated User users = 1;
+}
+
+message Empty {
+}
